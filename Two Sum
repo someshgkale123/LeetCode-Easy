@@ -5,6 +5,8 @@ You may assume that each input would have exactly one solution, and you may not 
 
 Solution:
 
+Looping for ith and ith+1 i.e jth element in the array, if the addition of ith and jth element is equal to the target then return ith and jth element. 
+
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         for i in range(len(nums)):
