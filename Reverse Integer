@@ -1,0 +1,20 @@
+Problem Statement:
+Given a 32-bit signed integer, reverse digits of an integer.
+
+Solution:
+
+First converting the ineteger into string and reversing it, if negative sign then append the negative sign infront of the reversed string. 
+Also, checking if 32-bit signed integer or not.
+
+class Solution:
+    def reverse(self, x: int) -> int:
+        reverse=str(x)[::-1]
+        result=0
+        if '-' in reverse:
+            result=int('-'+reverse[:-1])
+        else:
+            result=int(reverse)
+        if (-2**31)<result<(2**31-1):
+            return(result)
+        else:
+            return(0)
