@@ -1,0 +1,60 @@
+Problem Statement:
+
+Given two strings S and T, return if they are equal when both are typed into empty text editors. # means a backspace character.
+
+Example 1:
+Input: S = "ab#c", T = "ad#c"
+Output: true
+Explanation: Both S and T become "ac".
+
+Example 2:
+Input: S = "ab##", T = "c#d#"
+Output: true
+Explanation: Both S and T become "".
+
+Example 3:
+Input: S = "a##c", T = "#a#c"
+Output: true
+Explanation: Both S and T become "c".
+
+Example 4:
+Input: S = "a#c", T = "b"
+Output: false
+Explanation: S becomes "c" while T becomes "b".
+
+
+Solution 1:
+class Solution(object):
+    def backspaceCompare(self, S, T):
+        li1=[]
+        for i in S:
+            if i=="#" and li1:
+                li1.pop()
+            elif i=='#' and not li1:
+                continue
+            else:
+                li1.append(i)
+        li2=[]
+        for i in T:
+            if i=="#" and li2:
+                li2.pop()
+            elif i=='#' and not li2:
+                continue
+            else:
+                li2.append(i)
+        print(li1)
+        print(li2)
+        return li1==li2       
+        
+Solution 2:
+class Solution(object):
+    def backspaceCompare(self, S, T):
+        def compare(x):
+            li=[]
+            for i in x:
+                if i!='#':
+                    li.append(i)
+                elif li:
+                    li.pop()
+            return li
+        return compare(S)==compare(T)
