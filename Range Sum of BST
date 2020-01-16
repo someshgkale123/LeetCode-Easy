@@ -13,6 +13,9 @@ Output: 23
 
 
 Solution:
+
+Iterative solution:
+
 # Definition for a binary tree node.
 # class TreeNode(object):
 #     def __init__(self, x):
@@ -34,4 +37,20 @@ class Solution(object):
                 if node.val<R:
                     stack.append(node.right)
         return result
+        
+Recursive solution:
+def summ(root,L,R):
+    
+    result=0
+    if L<=root.val<=R:
+        result+=root.val
+    if root.left and root.val>L:
+        result+=summ(root.left,L,R)
+    if root.right and root.val<R:
+        result+=summ(root.right,L,R)
+    return result
+
+class Solution(object):
+    def rangeSumBST(self, root, L, R):
+        return summ(root,L,R)
         
