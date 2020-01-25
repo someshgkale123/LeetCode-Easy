@@ -1,0 +1,24 @@
+Problem Statement:
+
+Implement function ToLowerCase() that has a string parameter str, and returns the same string in lowercase.
+Example 1:
+Input: "Hello"
+Output: "hello"
+Example 2:
+Input: "here"
+Output: "here"
+Example 3:
+Input: "LOVELY"
+Output: "lovely"
+
+Solution:
+
+class Solution:
+    def toLowerCase(self, str: str) -> str:
+        new=""
+        for i in str:
+            if i.isupper():
+                new+=i.lower()
+            else:
+                new+=i
+        return new
