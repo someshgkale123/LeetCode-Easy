@@ -1,0 +1,68 @@
+Problem Statement:
+
+Given a Binary Search Tree and a target number, return true if there exist two elements in the BST such that their sum is equal to the 
+given target.
+
+Example 1:
+Input: 
+    5
+   / \
+  3   6
+ / \   \
+2   4   7
+
+Target = 9
+Output: True
+ 
+
+Example 2:
+Input: 
+    5
+   / \
+  3   6
+ / \   \
+2   4   7
+
+Target = 28
+Output: False
+ 
+ 
+Solution:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        # Solution 1
+        li=set()
+        def check(root,k,li):
+            if not root:
+                return False
+            if (k-root.val) in li:
+                return True
+            li.add(root.val)
+            return check(root.left,k,li) or check(root.right,k,li)
+        return check(root,k,li)
+        
+        '''
+        # Solution 2
+        arr=[]
+        def inorder(root):
+            if root:
+                inorder(root.left)
+                arr.append(root.val)
+                inorder(root.right)
+        inorder(root)
+        dict={}
+        for i,j in enumerate(arr):
+            n=k-j
+            if n not in dict:
+                dict[j]=i
+            else:
+                return True
+        return False
+        '''
