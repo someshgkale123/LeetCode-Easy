@@ -1,0 +1,38 @@
+Problem Statement:
+
+Given a string S and a character C, return an array of integers representing the shortest distance from the character C in the string.
+Example 1:
+Input: S = "loveleetcode", C = 'e'
+Output: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]
+
+
+Solution:
+class Solution:
+    def shortestToChar(self, S: str, C: str) -> List[int]:
+        '''
+        Slower
+        track=[]
+        for i in range(len(S)):
+            if S[i]==C:
+                track.append(i)
+        res=[]
+        for i in range(len(S)):
+            temp=[abs(j-i) for j in track]
+            res.append(min(temp))
+        return res
+        '''
+        '''
+        Faster
+        '''
+        res=[]
+        d_past=float('inf')
+        d_next=S.index(C)
+        for i,j in enumerate(S):
+            if j==C:
+                d_past=i
+                if C in S[i+1:]:
+                    d_next=i+1+(list(S[i+1:]).index(C))
+                else:
+                    d_next=float('inf')
+            res.append(min(abs(i-d_next),abs(i-d_past)))
+        return res
