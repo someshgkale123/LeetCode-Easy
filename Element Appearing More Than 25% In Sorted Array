@@ -1,0 +1,28 @@
+Problem Statement:
+
+Given an integer array sorted in non-decreasing order, there is exactly one integer in the array that occurs more than 25% of the time.
+Return that integer.
+
+Example 1:
+Input: arr = [1,2,2,6,6,6,6,7,10]
+Output: 6
+
+
+
+Solution:
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        n=len(arr)
+        dict=collections.OrderedDict()
+        for i in arr:
+            if i not in dict:
+                dict[i]=1
+            else:
+                dict[i]+=1
+            if dict[i]/n >0.25:
+                return i
+            '''
+        for i,j in dict.items():
+            if j/n>0.25:
+                return i
+                '''
