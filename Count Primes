@@ -1,0 +1,22 @@
+Problem Statement:
+
+Count the number of prime numbers less than a non-negative number, n.
+Example:
+Input: 10
+Output: 4
+Explanation: There are 4 prime numbers less than 10, they are 2, 3, 5, 7.
+
+
+Solution:
+### Using Sieve of Eratosthenes
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        cnt=0
+        check=[True]*n
+        for i in range(2,n):
+            if check[i]==True:
+                cnt=cnt+1
+                for j in range(i*i,n,i):
+                    check[j]=False
+        return cnt
+        
