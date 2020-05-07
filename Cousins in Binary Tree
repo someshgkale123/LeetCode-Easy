@@ -1,0 +1,60 @@
+Problem Statement:
+
+In a binary tree, the root node is at depth 0, and children of each depth k node are at depth k+1.
+Two nodes of a binary tree are cousins if they have the same depth, but have different parents.
+We are given the root of a binary tree with unique values, and the values x and y of two different nodes in the tree.
+Return true if and only if the nodes corresponding to the values x and y are cousins.
+
+Example 1:
+Input: root = [1,2,3,4], x = 4, y = 3
+Output: false
+
+Example 2:
+Input: root = [1,2,3,null,4,null,5], x = 5, y = 4
+Output: true
+
+Example 3:
+Input: root = [1,2,3,null,4], x = 2, y = 3
+Output: false
+
+Solution:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isCousins(self, root: TreeNode, x: int, y: int) -> bool:
+        check=[0,0]
+        d=0
+        depth=[0,0]
+        stack=[root]
+        while stack:
+            temp=[]
+            d+=1
+            for i in stack:
+                if i.left:
+                    if i.left.val== x:
+                        check[0]=i.val
+                        depth[0]=d
+                    
+                    elif i.left.val==y:
+                        check[1]=i.val
+                        depth[1]=d
+                    temp.append(i.left)
+                if i.right:
+                    if i.right.val==x:
+                        check[0]=i.val
+                        depth[0]=d
+                    elif i.right.val==y:
+                        check[1]=i.val
+                        depth[1]=d
+                    temp.append(i.right)
+                
+            if temp:
+                stack=temp
+                
+            else:
+                break
+        return check[0]!=check[1] and depth[0]==depth[1]
