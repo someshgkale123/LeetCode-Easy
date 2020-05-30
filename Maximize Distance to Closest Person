@@ -1,0 +1,56 @@
+Problem Statement:
+ 
+In a row of seats, 1 represents a person sitting in that seat, and 0 represents that the seat is empty. 
+here is at least one empty seat, and at least one person sitting.
+Alex wants to sit in the seat such that the distance between him and the closest person to him is maximized. 
+Return that maximum distance to closest person.
+
+Example 1:
+Input: [1,0,0,0,1,0,1]
+Output: 2
+Explanation: 
+If Alex sits in the second open seat (seats[2]), then the closest person has distance 2.
+If Alex sits in any other open seat, the closest person has distance 1.
+Thus, the maximum distance to the closest person is 2.
+
+Example 2:
+Input: [1,0,0,0]
+Output: 3
+Explanation: 
+If Alex sits in the last seat, the closest person is 3 seats away.
+This is the maximum distance possible, so the answer is 3.
+
+
+
+Solution:
+class Solution:
+    def maxDistToClosest(self, seats: List[int]) -> int:
+       
+        currmax=0
+        prevind=None
+        for i,j in enumerate(seats):
+            if j==1:
+                if prevind==None:
+                    currmax=i
+                else:
+                    currmax=max(currmax,(i-prevind)//2)
+                prevind=i
+        currmax=max(currmax,i-prevind)
+        return currmax
+                
+        """
+        if seats.count(1)==1:
+            ind=seats.index(1)
+            return max(ind-0,len(seats)-1-ind)
+        
+        track1s=[i+1 for i in range(len(seats)) if seats[i]==1]
+        
+        maxdist=0
+        if seats[0]==0:
+            maxdist=max(maxdist,track1s[0]-1)
+        for i in range(len(track1s)-1):
+            maxdist=max(maxdist,math.floor((track1s[i+1]-track1s[i])/2))
+        if seats[-1]==0:
+            maxdist=max(maxdist,len(seats)-track1s[-1])
+        return maxdist
+    """
