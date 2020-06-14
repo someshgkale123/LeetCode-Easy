@@ -10,11 +10,45 @@ Input: [-7,-3,2,3,11]
 Output: [4,9,9,49,121]
 
 
-
-Solution:
-class Solution(object):
-    def sortedSquares(self, A):
-        for i in range(len(A)):
-            A[i]=A[i]**2
-        return(sorted(A))
-            
+class Solution:
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        """
+        new=list(map(lambda a:a**2,A))
+        new.sort()
+        return new
+        """
+        negatives=[]
+        positives=[]
+        for each in A:
+            if each<0:
+                negatives.append(each*each)
+            else:
+                positives.append(each*each)
+        
+        
+        if not negatives and positives:
+            return positives
+        elif negatives and not positives:
+            return negatives[::-1]
+        
+        for each in negatives:
+            #print(positives)
+            value=each
+            low=0
+            high=len(positives)-1
+            while low<=high:
+                mid=(low+high)//2
+                if value==positives[mid]:
+                    positives.insert(mid,value)
+                    break
+                elif value<positives[mid]:
+                    if low==mid:
+                        positives.insert(low,value)
+                        break
+                    high=mid
+                else:
+                    if high==mid:
+                        positives.insert(high+1,value)
+                        break
+                    low=mid+1
+        return (positives)
