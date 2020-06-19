@@ -22,6 +22,8 @@ class Node:
 """
 class Solution:
     def postorder(self, root: 'Node') -> List[int]:
+        ########### Recursive #############
+        """
         li=[]
         def new(root):
             if not root:
@@ -31,3 +33,14 @@ class Solution:
             li.append(root.val)
         new(root)
         return li
+        """
+        ########### Iterative #############
+        li=[]
+        stack=[root]
+        while stack:
+            node=stack.pop()
+            if node:
+                li.append(node.val)
+                temp=[child for child in node.children]
+                stack=stack+temp
+        return li[::-1]
