@@ -21,6 +21,8 @@ class Node:
         self.children = children
 """
 class Solution:
+    ############# Recursive ###################
+    """
     def preorder(self, root: 'Node') -> List[int]:
         li=[]
         def new(root):
@@ -31,3 +33,18 @@ class Solution:
                 new(i)
         new(root)
         return li
+					""""
+					
+    ############# Iterative ###################
+				if not root:
+        return []
+				li=[]
+				stack=[root]
+				while stack:
+								node=stack.pop(0)
+								li.append(node.val)
+								temp=[]
+								for i in node.children:
+												temp.append(i)
+								stack=temp+stack
+				return li
