@@ -32,3 +32,21 @@ class Solution:
         for i in root.children:
             value=max(value,self.maxDepth(i))
         return value+1
+        """
+        ############# Iterative ##############
+        if not root:
+            return 0
+        stack=[root]
+        maxdepth=1
+        while stack:
+            temp=[]
+            for i in stack:
+                for child in i.children:
+                    temp.append(child)
+            if temp:
+                stack=temp
+                maxdepth+=1
+            else:
+                return maxdepth
+        """
+    
