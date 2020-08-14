@@ -1,0 +1,45 @@
+Problem Statement:
+
+Given a string which consists of lowercase or uppercase letters, find the length of the longest palindromes that can be built with those letters.
+This is case sensitive, for example "Aa" is not considered a palindrome here.
+
+Note:
+Assume the length of given string will not exceed 1,010.
+Example:
+Input:
+"abccccdd"
+Output:
+7
+Explanation:
+One longest palindrome that can be built is "dccaccd", whose length is 7.
+
+
+
+SOlution:
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        #### O(N),O(N)
+        dict={}
+        for i in s:
+            if i not in dict:
+                dict[i]=1
+            else:
+                dict[i]+=1
+        cnt=0
+        flag=False
+        queue=[(i,j) for i,j in dict.items()]
+        while queue:
+            char,val=queue.pop(0)
+            if val==1:
+                flag=True
+                continue
+            if val%2==0:
+                cnt+=val
+            else:
+                cnt+=val-1
+                queue.append((char,1))
+        if flag:
+            return cnt+1
+        else:
+            return cnt
+            
