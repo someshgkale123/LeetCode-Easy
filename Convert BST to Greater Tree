@@ -28,6 +28,7 @@ class Solution:
         self.total=0
         
     def convertBST(self, root: TreeNode) -> TreeNode:
+        ######## Iterative O(N);O(N)
         node=root
         stack=[]
         while stack or node:
@@ -39,3 +40,15 @@ class Solution:
             node.val=self.total
             node=node.left
         return root
+        
+        ######## Recursive O(N);O(N)
+        self.total=0
+        def convert(root):
+            if not root:
+                return
+            convert(root.right)
+            root.val+=self.total
+            self.total=root.val
+            convert(root.left)
+            return root
+        return convert(root)
