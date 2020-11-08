@@ -31,22 +31,38 @@ class Solution:
         
         ##### O(N);O(N)
         #####  N be the length of fib sequence where last number in the sequence is less than or equal to k
-        
+             
         if k==1:
             return 1
         
+        # initialize the fib sequence
         fib=[1,1]
+        
+        # temp will hold second last number from fib
         temp=fib[-2]
+        
+        # loop until the last number in fib is less than equal to k
         while fib[-1]<=k:
+            
+            # append next fib number and update temp
             fib.append(fib[-1]+temp)
             temp=fib[-2]
-        
+    
+        # as one extra number is appended in the sequence, pop it
         fib.pop()
+        
+        # set curr number to k and initialize count
         curr=k
         cnt=0
+        
+        # traverse from right to left on the fib sequence
         for each in range(len(fib)-1,-1,-1):
+            
+            # if curr is zero, we got the count of elements which sums to k
             if curr==0:
                 return cnt
+            
+            # if the current number from fib sequence is less than curr, pick that number and update curr and increment count
             if fib[each]<=curr:
                 cnt+=1
                 curr-=fib[each]
