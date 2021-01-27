@@ -40,5 +40,41 @@ class Solution:
                     i+=1
             except:
                 break
+
+        ######### Faster using three pointers 
+        
+        # have one pointer at m i.e end of nums1 elements
+        p1=m-1
+        
+        # have one pointer at n i.e end of nums2 elements
+        p2=n-1
+        
+        # one pointer to fill blank spaces
+        temp=m+n-1
+        
+        while p1>=0 and p2>=0:
+            
+            # if the current pointer element at nums1 is less than nums2 pointer, add nums2 element at blank space pointer and decrement p2 and temp
+            if nums1[p1]<=nums2[p2]:
+                nums1[temp]=nums2[p2]
+                p2-=1
+                temp-=1
+                
+            # else place nums1 element at blank space pointer and decrement p1 and temp
+            else:
+                nums1[temp]=nums1[p1]
+                temp-=1
+                p1-=1
+        
+        # check if elements are remaining from nums1 or nums2
+        while p1>=0:
+            nums1[temp]=nums1[p1]
+            temp-=1
+            p1-=1
+        
+        while p2>=0:
+            nums1[temp]=nums2[p2]
+            temp-=1
+            p2-=1
          
              
