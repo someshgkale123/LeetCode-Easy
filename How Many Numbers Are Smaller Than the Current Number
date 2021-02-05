@@ -26,9 +26,31 @@ Output: [0,0,0,0]
 Solution:
 class Solution:
     def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+        
+        ########## O(NlogN); O(N)
         new=sorted(nums)
         li=[]
         for i in nums:
             li.append(len(new[:new.index(i)]))
         return li
- 
+        
+        ########## O(max(max from nums,length of nums)); O(max from nums)
+        index=[0]*(max(nums)+1)
+        
+        for each in nums:
+            index[each]+=1
+        
+        lessnum={}
+        
+        runningsum=0
+        
+        for each in range(len(index)):
+            if index[each]:
+                lessnum[each]=runningsum
+            runningsum+=index[each]
+        
+        for each in range(len(nums)):
+            nums[each]=lessnum[nums[each]]
+            
+        return nums
+                
