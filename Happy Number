@@ -30,3 +30,19 @@ class Solution:
                 n=summ
             print(li)
         return True
+        
+        ######### O(logn) ; O(1)
+        def next(num):
+        new=0
+        while num:
+            new+=(num%10)**2
+            num=num//10
+        return new
+        
+        slow=n
+        fast=next(n)
+        
+        while fast !=slow and fast!=1:
+            slow=next(slow)
+            fast=next(next(fast))
+        return fast==1
