@@ -25,3 +25,14 @@ class Solution:
         for i in range(2,len(cost)):
             dp.append(min(cost[i]+dp[i-1],cost[i]+dp[i-2]))
         return(dp[-1])
+        
+        ##### O(N); O(1)
+        first=0
+        second=0
+      
+        for each in cost:
+            mn=min(each+first,each+second)
+            first=second
+            second=mn
+        
+        return min(second,first)
