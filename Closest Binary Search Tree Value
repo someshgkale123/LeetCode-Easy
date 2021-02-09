@@ -1,0 +1,58 @@
+Problem Statement:
+
+Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+Note:
+Given target value is a floating point.
+You are guaranteed to have only one unique value in the BST that is closest to the target.
+
+Example:
+Input: root = [4,2,5,1,3], target = 3.714286
+
+    4
+   / \
+  2   5
+ / \
+1   3
+
+Output: 4
+
+
+Solution:
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        
+        ######## O(N);O(H)
+        """
+        self.mn=float("inf")
+        self.value=None
+        
+        def inorder(root,target):
+            if not root:
+                return
+            inorder(root.left,target)
+            if abs(root.val-target)<self.mn:
+                self.mn=abs(root.val-target)
+                self.value=root.val
+            inorder(root.right,target)
+        inorder(root,target)
+        return self.value
+        """
+        ##### O(H); O(1)
+        mn=float("inf")
+        value=None
+        while root:
+            if abs(target-root.val)<mn:
+                mn=abs(target-root.val)
+                value=root.val
+            if target<root.val:
+                root=root.left
+            else:
+                root=root.right
+        return value
+        
