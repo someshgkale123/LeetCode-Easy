@@ -14,3 +14,27 @@ class Solution:
         total=int(string)+1
         li=[i for i in str(total)]
         return(li)
+        
+        ###### O(N); O(N)
+         def adjustcarry(digits):
+            carry=0
+            for each in range(len(digits)-1,-1,-1):
+                # print(digits)
+                num=carry+digits[each]
+                quo,rem=num//10, num%10
+                if quo:
+                    carry=quo
+                    digits[each]=rem
+                else:
+                    carry=0
+                    digits[each]=num
+                    break
+                    
+            return [1]+digits if carry else digits
+        carry=0
+        digits[-1]=digits[-1]+1
+        if digits[-1]>9:
+            return adjustcarry(digits)
+        else:
+            return digits
+        
